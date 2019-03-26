@@ -692,6 +692,7 @@
                 }
                 this.addDot(actor);
                 actor.listeners.add(this);
+                return actor;
             }
 
             onReachedCheckpoint(payload) {
@@ -708,7 +709,9 @@
                 for(let i = 0; i < 4; i++) {
                     path.push(this.randomPos());
                 }
-                this.addDot(new Actor(this, pos, 2, path));
+                let actor = new Actor(this, pos, 2, path);
+                this.addDot(actor);
+                return actor;
             }
 
             spawnStaticObjectAt(x,y) {
@@ -716,6 +719,7 @@
                 let so = new StaticObject(this, cell.center);
                 cell.staticObject = so;
                 this.addStatic(so)
+                return so;
             }
 
             despawn(aid) {
