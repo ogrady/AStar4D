@@ -1,4 +1,4 @@
-        let random;
+        //let random;
     
         $(document).ready(() => {
             // https://pixijs.io/examples/#/basics/basic.js
@@ -30,7 +30,7 @@
                 
             });
             $("#startButton").click(e => {
-                random = new Random($("#seed").val());
+                g.random = new Random($("#seed").val());
                 app.ticker.add(delta => g.update(delta));
             });
             

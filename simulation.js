@@ -1,5 +1,5 @@
        // from https://stackoverflow.com/a/7120353/5736269
-        Array.prototype.randomElement = function () {
+        Array.prototype.randomElement = function (random) {
             return this[Math.floor(random.next * this.length)]
         }
 
@@ -609,7 +609,7 @@
         }
 
         class Game extends EventEmitter {
-            constructor(canvas, width, height) {
+            constructor(canvas, width, height, random) {
                 super();
                 this.canvas = canvas;
                 let cellsize = new Dimensions(this.stageWidth/width, this.stageHeight/height);
@@ -618,6 +618,7 @@
                 this.actors = {};
                 this.accu = 0;
                 this.iteration = 0;
+                this.random = random;
                 this.grid.map(c => {
                     let cr = new CellRenderer(c, this.context, cellsize);
                     this.listeners.add(cr);
@@ -636,13 +637,13 @@
                 let vs = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];
                 let hex = "0x";
                 for(let i = 0; i < 6; i++) {
-                    hex += vs.randomElement();
+                    hex += vs.randomElement(this.random);
                 }
                 return hex;
             }
 
             randomInt(max) {
-                return Math.floor(random.next * Math.floor(max));
+                return Math.floor(this.random.next * Math.floor(max));
             }
 
             randomPos() {
